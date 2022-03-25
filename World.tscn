@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Flopper.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BouncyBall.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Screenshot 2022-03-25 at 13.21.25.png" type="Texture" id=4]
+[ext_resource path="res://assets/Asset 2.png" type="Texture" id=4]
+[ext_resource path="res://assets/Asset 3.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.98508, 15.3702 )
@@ -13,23 +14,41 @@ extents = Vector2( 396.841, 10 )
 
 [node name="World" type="Node"]
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 239.636, 345.91 )
-scale = Vector2( 0.477968, 0.477968 )
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( -117.224, -71.5686 )
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 605.0
+margin_bottom = 906.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Asset 3" type="Sprite" parent="Node2D"]
+position = Vector2( 361.02, 786.775 )
+scale = Vector2( 0.524736, 0.493508 )
+texture = ExtResource( 5 )
+
+[node name="Background" type="Sprite" parent="Node2D"]
+position = Vector2( 362.462, 400.514 )
+scale = Vector2( 0.511021, 0.533885 )
 texture = ExtResource( 4 )
 
 [node name="FlopperRight" parent="." instance=ExtResource( 2 )]
-position = Vector2( 397.106, 537.966 )
+position = Vector2( 417.324, 717.042 )
 applied_force = Vector2( 1, 3 )
 applied_torque = 3.0
 
 [node name="FlopperLeft" parent="." instance=ExtResource( 2 )]
-position = Vector2( 109.786, 533.89 )
+position = Vector2( 130.004, 712.966 )
 key = "ui_left"
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
 position = Vector2( 1.97583, 272.699 )
-scale = Vector2( 1, 20 )
+scale = Vector2( 1, 40 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 position = Vector2( -11.2612, 1.64225 )
@@ -37,7 +56,7 @@ shape = SubResource( 2 )
 
 [node name="RightWall" type="StaticBody2D" parent="."]
 position = Vector2( 489.458, 306.886 )
-scale = Vector2( 1, 20 )
+scale = Vector2( 1, 40 )
 
 [node name="Sprite" type="Sprite" parent="RightWall"]
 position = Vector2( 1.90735e-06, 1.90735e-06 )
@@ -57,6 +76,10 @@ position = Vector2( -56.4543, 1.54695 )
 shape = SubResource( 2 )
 
 [node name="Collisions" type="Node2D" parent="."]
+position = Vector2( -223.622, 21.2131 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
 position = Vector2( -147.298, 146.815 )
@@ -84,5 +107,5 @@ position = Vector2( 397.88, 86.1369 )
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 241.477, 619.895 )
+position = Vector2( 232.812, 805.711 )
 shape = SubResource( 3 )
