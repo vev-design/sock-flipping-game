@@ -1,23 +1,67 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://Flopper.tscn" type="PackedScene" id=2]
+[ext_resource path="res://FlipperRight.tscn" type="PackedScene" id=2]
 [ext_resource path="res://BouncyBall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Asset 2.png" type="Texture" id=4]
 [ext_resource path="res://assets/Asset 3.png" type="Texture" id=5]
+[ext_resource path="res://FlipperLeft.gd" type="Script" id=6]
+[ext_resource path="res://assets/Asset 7.png" type="Texture" id=7]
+[ext_resource path="res://World.gd" type="Script" id=8]
+[ext_resource path="res://assets/Asset 4.png" type="Texture" id=9]
+[ext_resource path="res://assets/Asset 6.png" type="Texture" id=10]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=11]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 566.509, 160.2, 0, 0, 0, 0, 547.955, 214.773, 0, 0, 0, 0, 541.406, 283.534, 0, 0, 0, 0, 524.767, 389.279, 0, 0, 0, 0, 525.49, 391.278 )
+}
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.98508, 15.3702 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="PhysicsMaterial" id=3]
+friction = 4.0
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16.0468, 5.43127 )
+
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 396.841, 10 )
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 57.1707, 10 )
+
+[sub_resource type="CircleShape2D" id=7]
+
 [node name="World" type="Node"]
+script = ExtResource( 8 )
+ball_scene = ExtResource( 3 )
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2( -117.224, -71.5686 )
+[node name="BallPath" type="Path2D" parent="."]
+position = Vector2( 166.631, 259.552 )
+scale = Vector2( 0.683561, 0.0954191 )
+curve = SubResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="Node2D"]
+[node name="BallPathSpawn" type="PathFollow2D" parent="BallPath"]
+position = Vector2( 566.509, 160.2 )
+rotation = 1.89854
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 657.582, 610.143 )
+scale = Vector2( 0.564959, 0.564959 )
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="FlipperArea" type="Node2D" parent="."]
+position = Vector2( 155.776, 233.431 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="SvartBG" type="ColorRect" parent="FlipperArea"]
 margin_left = 96.0
 margin_top = 64.0
 margin_right = 605.0
@@ -27,27 +71,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Asset 3" type="Sprite" parent="Node2D"]
+[node name="Hai" type="Sprite" parent="FlipperArea"]
 position = Vector2( 361.02, 786.775 )
 scale = Vector2( 0.524736, 0.493508 )
 texture = ExtResource( 5 )
 
-[node name="Background" type="Sprite" parent="Node2D"]
-position = Vector2( 362.462, 400.514 )
+[node name="ToppHai" type="Sprite" parent="FlipperArea"]
+position = Vector2( 364.025, 400.291 )
 scale = Vector2( 0.511021, 0.533885 )
 texture = ExtResource( 4 )
 
+[node name="E" type="Sprite" parent="FlipperArea"]
+position = Vector2( 284.756, 239.011 )
+texture = ExtResource( 10 )
+
+[node name="V" type="Sprite" parent="FlipperArea"]
+position = Vector2( 315.945, 409.395 )
+texture = ExtResource( 9 )
+
 [node name="FlopperRight" parent="." instance=ExtResource( 2 )]
-position = Vector2( 417.324, 717.042 )
+position = Vector2( 698.992, 885.795 )
+scale = Vector2( 1.5, 1.5 )
 applied_force = Vector2( 1, 3 )
 applied_torque = 3.0
 
 [node name="FlopperLeft" parent="." instance=ExtResource( 2 )]
-position = Vector2( 130.004, 712.966 )
-key = "ui_left"
+position = Vector2( 348.58, 885.786 )
+scale = Vector2( -1.5, 1.5 )
+script = ExtResource( 6 )
+velocity = 10
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
-position = Vector2( 1.97583, 272.699 )
+position = Vector2( 274.976, 577.699 )
 scale = Vector2( 1, 40 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
@@ -55,10 +110,11 @@ position = Vector2( -11.2612, 1.64225 )
 shape = SubResource( 2 )
 
 [node name="RightWall" type="StaticBody2D" parent="."]
-position = Vector2( 489.458, 306.886 )
+position = Vector2( 762.458, 611.886 )
 scale = Vector2( 1, 40 )
 
 [node name="Sprite" type="Sprite" parent="RightWall"]
+visible = false
 position = Vector2( 1.90735e-06, 1.90735e-06 )
 scale = Vector2( 0.308816, 0.31496 )
 texture = ExtResource( 1 )
@@ -67,45 +123,73 @@ texture = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="TopWall" type="StaticBody2D" parent="."]
-position = Vector2( 277.206, 57.4815 )
+position = Vector2( 550.206, 362.482 )
 rotation = 1.53671
 scale = Vector2( 1, 20 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
-position = Vector2( -56.4543, 1.54695 )
+position = Vector2( -247.291, 0.892809 )
 shape = SubResource( 2 )
 
 [node name="Collisions" type="Node2D" parent="."]
-position = Vector2( -223.622, 21.2131 )
+position = Vector2( 79.1569, 415.764 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
+position = Vector2( -147.298, 146.815 )
+physics_material_override = SubResource( 3 )
+
+[node name="CollisionShapeE" type="CollisionShape2D" parent="Collisions/StaticBody2D"]
+position = Vector2( 612.896, -202.44 )
+rotation = 2.03156
+shape = SubResource( 4 )
+
+[node name="CollisionShapeV" type="CollisionPolygon2D" parent="Collisions/StaticBody2D"]
+position = Vector2( 147.298, -146.815 )
+polygon = PoolVector2Array( 347.699, 174.092, 348.046, 190.398, 384.474, 280.602, 400.433, 280.948, 437.555, 188.663, 438.943, 174.092, 422.984, 174.092, 393.841, 253.194, 362.964, 174.092 )
+
+[node name="WeirdShit" type="CollisionPolygon2D" parent="Collisions/StaticBody2D"]
+visible = false
+polygon = PoolVector2Array( -16.7851, 52.7705, 253.317, -20.9678, 299.353, 33.2156, 272.872, 136.694, -1.30414, 90.2508 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Collisions"]
+visible = false
+polygon = PoolVector2Array( 106, 126, 151, 179, 126, 283, -149, 237, -164.71, 199.296 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 273, 305 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 247.632, 910.796 )
+shape = SubResource( 5 )
+
+[node name="BallTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="BouncyBall" parent="." instance=ExtResource( 3 )]
+position = Vector2( 471.849, 536.742 )
+
+[node name="HUD" parent="." instance=ExtResource( 11 )]
+
+[node name="BottomPitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPitArea"]
+position = Vector2( 523.209, 994.226 )
+scale = Vector2( 1, 4 )
+shape = SubResource( 6 )
+
+[node name="WinArea" type="Area2D" parent="."]
+position = Vector2( 471.219, 610.482 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Collisions"]
-position = Vector2( -147.298, 146.815 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collisions/StaticBody2D"]
-polygon = PoolVector2Array( -16.7851, 52.7705, 253.317, -20.9678, 299.353, 33.2156, 272.872, 136.694, -1.30414, 90.2508 )
-
-[node name="Polygon2D" type="Polygon2D" parent="Collisions"]
-polygon = PoolVector2Array( 106, 126, 151, 179, 126, 283, -149, 237, -164.71, 199.296 )
-
-[node name="Balls" type="Node" parent="."]
-
-[node name="BouncyBall2" parent="Balls" instance=ExtResource( 3 )]
-position = Vector2( 269.998, 241.85 )
-
-[node name="BouncyBall" parent="Balls" instance=ExtResource( 3 )]
-position = Vector2( 379.666, 157.399 )
-
-[node name="BouncyBall3" parent="Balls" instance=ExtResource( 3 )]
-position = Vector2( 300.991, 86.2288 )
-
-[node name="BouncyBall4" parent="Balls" instance=ExtResource( 3 )]
-position = Vector2( 397.88, 86.1369 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 232.812, 805.711 )
-shape = SubResource( 3 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinArea"]
+shape = SubResource( 7 )
+[connection signal="body_entered" from="FlopperRight" to="BouncyBall" method="_on_FlopperRight_body_entered"]
+[connection signal="body_shape_entered" from="FlopperRight" to="BouncyBall" method="_on_FlopperRight_body_shape_entered"]
+[connection signal="timeout" from="BallTimer" to="." method="_on_BallTimer_timeout"]
+[connection signal="decrement_score" from="BouncyBall" to="HUD" method="_on_BouncyBall_decrement_score"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="start_game" from="HUD" to="." method="_on_HUD_start_game"]
+[connection signal="body_entered" from="BottomPitArea" to="BouncyBall" method="_on_BottomPitArea_body_entered"]
+[connection signal="body_entered" from="WinArea" to="BouncyBall" method="_on_WinArea_body_entered"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/yay.ogg-bc13bacfbf8952adbde35d6427abfe74.oggstr"
+
+[deps]
+
+source_file="res://yay.ogg"
+dest_files=[ "res://.import/yay.ogg-bc13bacfbf8952adbde35d6427abfe74.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

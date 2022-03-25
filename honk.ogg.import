@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/honk.ogg-330547c6ec77d0b5e654d0922b226b08.oggstr"
+
+[deps]
+
+source_file="res://honk.ogg"
+dest_files=[ "res://.import/honk.ogg-330547c6ec77d0b5e654d0922b226b08.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

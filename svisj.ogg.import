@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/svisj.ogg-f772fd5e9d1933fb61277bb53ef93c66.oggstr"
+
+[deps]
+
+source_file="res://svisj.ogg"
+dest_files=[ "res://.import/svisj.ogg-f772fd5e9d1933fb61277bb53ef93c66.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
