@@ -1,11 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://socks.png" type="Texture" id=1]
 [ext_resource path="res://Flipper.gd" type="Script" id=2]
-
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 19.0095
-height = 35.4549
 
 [node name="Flopper" type="RigidBody2D"]
 position = Vector2( 0.00863647, 0.0137568 )
@@ -14,15 +10,12 @@ gravity_scale = 0.0
 script = ExtResource( 2 )
 velocity = 20
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -29.3751, -0.68406 )
-rotation = 0.935496
-scale = Vector2( 1, 2 )
-shape = SubResource( 1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -27.4659, -7.70064 )
 rotation = 5.23599
 scale = Vector2( 0.111738, 0.100931 )
 texture = ExtResource( 1 )
 offset = Vector2( -37.2309, -0.641709 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -96.4926, 14.7688, -60.7929, 6.8355, -16.5933, -18.2393, 11.5981, -49.689, 36.5312, -19.5143, -6.53505, 12.0771, -2.2851, 38.0019, -52.5763, 40.5519, -99.4676, 32.6186 )
